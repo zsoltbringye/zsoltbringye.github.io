@@ -1,17 +1,28 @@
+// https://zsoltbringye.github.io/test2.js
+
+
 (function(ext) {
-    // Code to be run when the user closes the window, reloads the page, etc.    
+    // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
-    
-    // Shows the status of the extension 0 = red, 1 = yellow, and 2 = green
+
+    // Status reporting code
+    // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
         return {status: 2, msg: 'Ready'};
     };
-    // Descriptions of the blocks and menus the extension adds
+
+    ext.power = function(base, exponent) {
+        return Math.pow(base, exponent);
+    };
+
+    // Block and block menu descriptions
     var descriptor = {
         blocks: [
+            // Block type, block name, function name, param1 default value, param2 default value
+            ['r', '%n ^ %n', 'power', 2, 3],
         ]
     };
-    // Register the extension
-    ScratchExtensions.register('Hello World', descriptor, ext);
-})({});
 
+    // Register the extension
+    ScratchExtensions.register('Sample extension', descriptor, ext);
+})({});
